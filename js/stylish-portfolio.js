@@ -4,6 +4,17 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+ /*
+var ref = firebase.database().ref('results').once('value',(snapshot)=>{
+   const lis= [];
+   //console.log("hi");
+   //console.log(snapshot.val());
+   for (int i = 0; i < 6; i++) {
+	   console.log(list.toString());
+   }
+ });
+*/
+
 (function($) {
   "use strict"; // Start of use strict
 
