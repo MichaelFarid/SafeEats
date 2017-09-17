@@ -63,10 +63,11 @@ function redrawTable() {
 	// Add table rows
 	for (var i = 0; i < arr.length; i++) {
 		var name = arr[i].Name;
-		if (name == query) {	
-			console.log(name);
-			console.log(query);
-			$('#addr'+rowNum).html("<td>"+ arr[i].Date +"</td><td><text>"+ arr[i].Name + "</text></td>" + 
+		if (name == query) {
+			$('#addr'+rowNum).html("<td><button type='button'" +
+			"class='btn btn-primary' id='1'>" +
+			(rowNum+1) + "</button></td>"+
+			"<td>" + arr[i].Date +"</td><td><text>"+ arr[i].Name + "</text></td>" + 
 			"<td><text>"+arr[i].StreetNum + " " + arr[i].StreetName + "</text></td>" + 
 			"<td><text>" + arr[i].Severity + "</text></td>")
 			$('#tab_logic').append('<tr id="addr'+(rowNum+1)+'"></tr>');
@@ -83,12 +84,9 @@ $(document).ready(function() {
 	});
 });
 
-
-/*
-function addTableRow() {
-	$('#addr'+i).html("<td>"+ (i+1) +"</td><td><text>Placeholder</text></td>" + 
-		"<td><text>Placeholder</text></td><td><text>Not Critical</text></td>")
-		$('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-		i++; 
+$(document).ready(function() {
+	$("btn btn-primary").click(function(event) {
+		var elementIdStr = event.target.id;
+		var arrIndex = parseInt(elementIdStr);
 	});
-}*/
+});
