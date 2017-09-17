@@ -65,20 +65,47 @@ var arr = [{
 	Severity:"Critical",
 	StreetName:"COMMERCE ST",
 	StreetNum:"50",
-	ZipCode:"10014"}];
+	ZipCode:"10014"},
+	{City:"MANHATTAN",
+	Code:"08A",
+	Cuisine:"American",
+	Date:"4/11/2014",
+	Description:"Facility not vermin proof. Harborage or conditions conducive to attracting vermin to the premises and/or allowing vermin to exist.",
+	ID:"40536280",
+	Name:"TRINITY PUB",
+	PhoneNumber:"2123274450",
+	Score:"23",
+	Severity:"Not Critical",
+	StreetName:"EAST 84 STREET",
+	StreetNum:"229",
+	ZipCode:"10028"},
+	{City:"BROOKLYN",
+	Code:"20A",
+	Cuisine:"American",
+	Date:"11/17/2014",
+	Description:"Food allergy information poster not conspicuously posted where food is being prepared or processed by food workers.",
+	ID:"41372258",
+	Name:"EDDIE'S HERO PLACE",
+	PhoneNumber:"7187451350",
+	Score:"",
+	Severity:"Not Critical",
+	StreetName:"4 AVENUE",
+	StreetNum:"6917",
+	ZipCode:"11209"}];
 
 function redrawTable() {
 	var query = document.getElementById("search-bar").value;
-	console.log(query);
-    var rowNum = 0;
+	var rowNum = 0;
 	// Reset table
 	$("#violations-list").html("<tr id='addr0'></tr>");
+	// Reset infobox
+	$("#inspection-info").html("");
 	// Add table rows
 	for (var i = 0; i < arr.length; i++) {
 		var name = arr[i].Name;
 		if (name == query) {
 			$('#addr'+rowNum).html("<td><button type='button'" +
-			"class='btn btn-primary' id='1'>" +
+			"class='btn btn-primary' id=" + i + ">" +
 			(rowNum+1) + "</button></td>"+
 			"<td>" + arr[i].Date +"</td><td><text>"+ arr[i].Name + "</text></td>" + 
 			"<td><text>"+arr[i].StreetNum + " " + arr[i].StreetName + "</text></td>" + 
@@ -89,6 +116,25 @@ function redrawTable() {
 	}
 }
 
+function redrawInfoBox(event) {
+	var elementIdStr = event.target.id;
+	var i = parseInt(elementIdStr);
+	$('#inspection-info').html(
+		"<p>ID: " + arr[i].ID + "</p>" +
+		"<p>Restaurant: " + arr[i].Name + "</p>" +
+		"<p>Cuisine: " + arr[i].Cuisine + " </p>" +
+		"<p>Violation Severity: "+ arr[i].Severity + "</p>" +
+		"<p>Address: " + arr[i].StreetNum + " " + arr[i].StreetName + "</p>" +
+		"<p>Borough: " + arr[i].City + "</p>" +
+		"<p>Zip Code: " + arr[i].ZipCode + "</p>" +
+		"<p>Phone Number: " + arr[i].PhoneNumber + "</p>" +
+		"<p>Inspection Date: " + arr[i].Date + "</p>" +
+		"<p>Violation Code: " + arr[i].Code + "</p>" +
+		"<p>Violation: " + arr[i].Description + "</p>" +
+		"<p>Total Inspection Score: " + arr[i].Score + "</p>"
+	)
+}
+
 $(document).ready(function() {
 	$(this).on('keypress', function(event) {
 		if (event.keyCode == 13) {
@@ -97,9 +143,8 @@ $(document).ready(function() {
 	});
 });
 
-$(document).ready(function() {
-	$("btn btn-primary").click(function(event) {
-		var elementIdStr = event.target.id;
-		var arrIndex = parseInt(elementIdStr);
-	});
+$(document).on('click','.btn', function(){
+	redrawInfoBox(event);
 });
+
+
