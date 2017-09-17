@@ -62,10 +62,10 @@
     </header>
 	
 	<!--Input Form-->
-	<form>
+	<form onsubmit="alert('submit!');return false">
 		<div class="form-group" style="text-align:center; padding:5%;">
 			<label for="input"><h2>Search Restaurants</h2></label>
-			<input class="form-control input-lg" id="input" type="text">
+			<input class="form-control input-lg" id="search-bar" type="text">
 		</div>
 	</form>
 	
@@ -75,7 +75,7 @@
 			<div class="col-md-12 column">
 				<table class="table table-bordered table-hover" id="tab_logic">
 					<thead>
-						<tr >
+						<tr>
 							<th class="text-center">
 								ID
 							</th>
@@ -87,6 +87,9 @@
 							</th>
 							<th class="text-center">
 								Severity
+							</th>
+							<th class="text-center">
+								More
 							</th>
 						</tr>
 					</thead>
@@ -104,6 +107,11 @@
 							<td>
 							<text>Critical</text>
 							</td>
+							<td>
+							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#information" aria-expanded="false" aria-controls="collapseExample">
+							*
+							</button>
+							</td>
 						</tr>
 						<tr id='addr1'></tr>
 					</tbody>
@@ -112,6 +120,41 @@
 		</div>
 		<a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
 	</div>
+	
+	<div id="accordion" role="tablist" aria-multiselectable="true">
+	  <div class="card">
+		<div class="card-header" role="tab" id="heading0">
+		  <h5 class="mb-0">
+			<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				Trump Tower - 725 5th Avenue, Manhattan
+			</a>
+		  </h5>
+		</div>
+		<div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+			<div class="card-block">
+				<p>ID: 00000000</p>
+				<p>Restaurant: TRUMP TOWER</p>
+				<p>Cuisine: American</p>
+				<p>Violation Severity: Critical</p>
+				<p></p>
+				<p>Address: 725 5th Avenue</p>
+				<p>Borough: Manhattan</p>
+				<p>Zip Code: 10022</p>
+				<p>Phone Number: 6666666666</p>
+				<p></p>
+				<p>Inspection Date: 11/9/2016</p>
+				<p>Violation Code: 04M</p>
+				<p>Violation: Live roaches present in facility's food and/or non-food areas.</p>
+				<p>Action Taken: Establishment Closed by DOHMH.  Violations were cited in the following area(s) and those requiring immediate action were addressed.</p>
+				<p>Total Inspection Score: 10</p>
+				<p>Inspection: A</p>
+				<p>Inspection Type: Cycle Inspection / Initial Inspection</p>
+				<p>Grade Issuance Date: 12/1/16</p>
+			</div>
+		</div>
+	  </div>
+	</div>
+	
     <!-- About -->
     <section id="about" class="about">
       <div class="container text-center">
@@ -128,6 +171,7 @@
           <div class="col-lg-10 mx-auto">
             <h2>Powered By</h2>
             <hr class="small">
+			<!--Row of descriptions-->
             <div class="row">
               <div class="col-md-3 col-sm-6">
                 <div class="service-item">
@@ -139,7 +183,6 @@
                     <strong>John Snow Labs</strong>
                   </h4>
                   <p>Data from the food Safety API is the primary data source for the inspections and violations.</p>
-                  <a href="#" class="btn btn-light">Learn More</a>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6">
@@ -152,7 +195,6 @@
                     <strong>Maps and Locations</strong>
                   </h4>
                   <p>Google Maps and Places API is used to locate and display the location of restaurants</p>
-                  <a href="#" class="btn btn-light">Learn More</a>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6">
@@ -165,7 +207,6 @@
                     <strong>Zomato API</strong>
                   </h4>
                   <p>Zomato API is used to get the ratings and description of restaurants.</p>
-                  <a href="#" class="btn btn-light">Learn More</a>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6">
@@ -178,6 +219,28 @@
                     <strong>Bootstrap 4</strong>
                   </h4>
                   <p>Bootstrap templates and snippets were used to construct the website</p>
+                </div>
+              </div>
+            </div>
+			<!--Row of buttons-->
+			<div class="row">
+              <div class="col-md-3 col-sm-6">
+                <div class="service-item">
+                  <a href="#" class="btn btn-light">Learn More</a>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+				<div class="service-item">
+                  <a href="#" class="btn btn-light">Learn More</a>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="service-item">
+                  <a href="#" class="btn btn-light">Learn More</a>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="service-item">
                   <a href="#" class="btn btn-light">Learn More</a>
                 </div>
               </div>
@@ -190,12 +253,6 @@
       </div>
       <!-- /.container -->
     </section>
-
-
-
-
-
-
 
     <!-- Portfolio -->
     <section id="portfolio" class="portfolio">
@@ -254,13 +311,34 @@
     </aside>
 
     <!-- Map -->
-    <section id="contact" class="map">
+    <div id="map" style="height: 400px;width: 100%;"></div>
+	<!--script src="js/map-script.js"></script-->
+	<!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXIVXnJxHVBwes4of-e4vK_SGA_mGPDfE&libraries=places&callback=initMap" async defer></script-->
+	<script>
+		function initMap() {
+			var nyc = {lat: 40.7128, lng: -74.0059};
+			var map = new google.maps.Map(
+				document.getElementById('map'), {
+				zoom: 10, 
+				center: nyc
+			});
+			var marker = new google.maps.Marker({
+				position: nyc,
+				map: map
+			});
+		}
+		
+	</script>
+	<script async defer 
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXIVXnJxHVBwes4of-e4vK_SGA_mGPDfE&callback=initMap">
+	</script>
+	<!--section id="contact" class="map">
       <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
       <br/>
       <small>
         <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
       </small>
-    </section>
+    </section-->
 
     <!-- Footer -->
     <footer>
